@@ -4,7 +4,7 @@
 
 Chat with others in the world, even you can't say their language.
 
-[![Build Status](https://travis-ci.com/backslash112/globalchat-expressjs.svg?token=tyH6w5XwPvDhsxMVozmy&branch=master)](https://travis-ci.com/backslash112/globalchat-expressjs)
+<!-- [![Build Status](https://travis-ci.com/backslash112/globalchat-expressjs.svg?token=tyH6w5XwPvDhsxMVozmy&branch=master)](https://travis-ci.com/backslash112/globalchat-expressjs) -->
 
 ##  Using Skills
 
@@ -26,5 +26,5 @@ $ ng serve --host 0.0.0.0
 or you can do that with Docker:
 ```
 docker run -it --rm -v "$PWD":/usr/src/app -w /usr/src/app node /bin/bash -c 'npm i'
-docker run -it --rm -w /app -v $(pwd):/app -p 4200:4200 alexsuch/angular-cli:6.0.3  ng serve --host 0.0.0.0
+docker run -it --rm -w /app -v $(pwd):/app -p 4200:4200 alexsuch/angular-cli:6.0.3 ng serve --host 0.0.0.0
 ```
