@@ -1,34 +1,35 @@
 import { Injectable } from '@angular/core';
 import * as io from 'socket.io-client';
+import { User } from '../models/user.model';
+import { Observable } from 'rxjs';
+import { Message } from '../models/message.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
-  private url = 'http://localhost/chat';
+  private url = 'http://0.0.0.0:8080/chat';
   private socket;
   constructor() { 
-    this.socket = io(this.url);
-    this.socket.on('msg', data => {
-      
+    this.socket = io.connect(this.url);
+    this.socket.on('connect', () => {
+      console.log(this.socket);
+    });
+  }
+
+  public send(message: Message, reciever: User) {
+    console.log(`send message: (${message.text}) to: ${reciever.email}`)
+    this.socket.emit('send_msg', {
+      to: reciever.email,
+      message: message
     })
   }
 
-  public getUnread() {
-
-  }
-
-  public send(msg: string, receiver: string) {
-    console.log(`send message: (${msg}) to: (${receiver}`)
-    this.socket.emit('msg', {
-      receiver: receiver,
-      msg: msg
-    })
-  }
-
-  public listen(callback) {
-    this.socket.on('msg', data => {
-      callback(data);
-    })
+  public onMessage(): Observable<Message> {
+    return new Observable<Message>(observer => {
+      this.socket.on('new_msg', data => {
+        observer.next(data);
+      });
+    });
   }
 }

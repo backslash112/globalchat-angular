@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatService } from './services/chat.service';
+import { User } from './models/user.model';
+import { Message } from './models/message.model';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +18,8 @@ export class AppComponent implements OnInit {
   }
 
   sendClicked() {
-    this.chatService.send('hi, this is carl!', 'user1001');
+    const message = new Message("hi, there!");
+    const user = new User("user2@gmail.com");
+    this.chatService.send(message, user);
   }
 }
