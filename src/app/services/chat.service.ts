@@ -12,7 +12,7 @@ export class ChatService {
   private socket;
   constructor() { 
     this.socket = io.connect(this.url);
-    this.socket.on('connect', () => {
+    this.socket.on('connectw', () => {
       console.log(this.socket);
     });
   }
