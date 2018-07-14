@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, ValidationErrors, AbstractControl, 
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user.model';
 import { AsyncEmailValidator } from '../../validators/async-email.validator';
+import { Router } from '../../../../node_modules/@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -17,7 +18,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private asyncEmailValidator: AsyncEmailValidator) { }
+    private asyncEmailValidator: AsyncEmailValidator,
+    private router: Router) { }
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -41,6 +43,8 @@ export class RegisterComponent implements OnInit {
     this.authService.signUp(user).subscribe(
       data => {
         console.log(data);
+        alert('You have registered successfully.');
+        this.router.navigate(["/login"]);
       },
       err => {
         console.dir(err);
