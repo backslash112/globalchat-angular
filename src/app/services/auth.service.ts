@@ -2,21 +2,26 @@ import { server } from '../../config';
 
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { User } from '../models/user.model';
 // import { store, SetApplicationActions } from '../jobs/myApplicationsState';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class AuthService {
 
   private tokenKey: string = 'app_token';
   private userKey: string = 'user';
   private currentToken: string = '';
   private currentUser: User;
+  private loggedIn = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient) { }
+
+  get isLoggedIn() {
+    return this.loggedIn.asObservable();
+  }
 
   private getUrl(router: string): string {
     return server.host + ":" + server.port + router;
@@ -55,6 +60,8 @@ export class UserService {
           observer.next(res['data']);
         }
 
+        this.loggedIn.next(true);
+
       }, err => {
         observer.error(err);
       }, () => {
@@ -67,6 +74,7 @@ export class UserService {
     this.currentToken = null;
     this.currentUser = null;
     localStorage.clear();
+    this.loggedIn.next(false);
   }
 
   public getCurrentToken() {
