@@ -1,0 +1,43 @@
+<div class="signin-container">
+  <mat-card>
+    <mat-card-content>
+      <form class="signin-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <img class="formIcon" src="assets/images/globalchat.ico" />
+        <h1>Please login to continue</h1>
+        <mat-form-field class="input-full-width">
+          <input matInput formControlName="email" placeholder="Email">
+          <mat-error *ngIf="form.controls['email'].errors && form.controls['email'].errors['required']">
+            Email can't be blank
+          </mat-error>
+          <mat-error *ngIf="form.controls['email'].errors && form.controls['email'].errors['email']">
+            Email is invalid
+          </mat-error>
+          <mat-error *ngIf="form.controls['email'].errors && form.controls['email'].errors['uniqueEmail']">
+            Email already exists
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="input-full-width">
+          <input matInput type="password" formControlName="password" placeholder="Password">
+          <mat-error *ngIf="form.controls['password'].errors && form.controls['password'].errors['required']">
+            Password can't be blank
+          </mat-error>
+          <mat-error *ngIf="form.controls['password'].errors && form.controls['password'].errors['minlength']">
+            Password is too short (minimum is 7 characters)
+          </mat-error>
+        </mat-form-field>
+        <p>{{ form.status}}</p>
+        <button mat-raised-button color="primary" [disabled]="!form.valid">Login</button>
+
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-content>
+      <label>New to GlobalChat?</label>
+      <a mat-button routerLink="/register">Create an account.</a>
+    </mat-card-content>
+  </mat-card>
+</div>

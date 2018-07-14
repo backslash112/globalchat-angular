@@ -1,0 +1,32 @@
+
+.signin-form {
+  min-width: 150px;
+  max-width: 400px;
+  width: 100%;
+}
+
+mat-card {
+  max-width: 300px;
+  margin: 2em auto; /* locate to center */
+  text-align: center;
+}
+
+.signin-container {
+  padding: 60px 1rem;
+}
+
+.input-full-width {
+  width: 100%;
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: 300;
+  letter-spacing: -0.5px;
+}
+
+.formIcon {
+  margin: 0 4px 3px 0;
+  height: 80px;
+  vertical-align: middle;
+}
