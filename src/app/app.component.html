@@ -1,3 +1,25 @@
-<h3>hi</h3>
-<!-- <button (click)="sendClicked()">send</button> -->
-<router-outlet></router-outlet>
+<table id="container">
+  <tr>
+    <td valign="top">
+      <div id="main">
+        <app-header> </app-header>
+      </div>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <router-outlet> </router-outlet>
+    </td>
+  </tr>
+
+  <tr>
+    <td valign="bottom">
+      <div id="footer">
+        <app-footer></app-footer>
+      </div>
+    </td>
+  </tr>
+</table>
+
+<!-- position the footer at the bottom of its container: https://stackoverflow.com/a/9090522/2195426 -->
