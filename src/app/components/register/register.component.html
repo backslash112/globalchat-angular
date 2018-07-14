@@ -1,0 +1,44 @@
+<div class="signin-container">
+  <mat-card>
+    <mat-card-content>
+      <form class="signin-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <img class="formIcon" src="assets/images/globalchat.ico" />
+        <h1>Join GlobalChat</h1>
+        <mat-form-field class="input-full-width">
+          <!-- also can use directive: uniqueEmail -->
+          <input matInput id="email" formControlName="email" placeholder="Email">
+          <mat-error *ngIf="form.controls['email'].errors && form.controls['email'].errors['required']">
+            Email can't be blank
+          </mat-error>
+
+          <mat-error *ngIf="form.controls['email'].errors && form.controls['email'].errors['email']">
+            Email is invalid
+          </mat-error>
+
+          <mat-error *ngIf="form.controls['email'].errors && form.controls['email'].errors['uniqueEmail']">
+            Email already exists
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="input-full-width">
+          <input matInput id="password" type="password" formControlName="password" placeholder="Password">
+          <mat-error *ngIf="form.controls['password'].errors && form.controls['password'].errors['required']">
+            Password can't be blank
+          </mat-error>
+          <mat-error *ngIf="form.controls['password'].errors && form.controls['password'].errors['minlength']">
+            Password is too short (minimum is 7 characters)
+          </mat-error>
+        </mat-form-field>
+        <p>{{ form.status}}</p>
+        <button mat-raised-button color="primary" [disabled]="!form.valid">Create an Account</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-content>
+      <label>Already have an account?</label>
+      <a mat-button routerLink="/login">Login.</a>
+    </mat-card-content>
+  </mat-card>
+</div>

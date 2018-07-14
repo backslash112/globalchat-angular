@@ -17,7 +17,12 @@ export class AuthService {
   private currentUser: User;
   private loggedIn = new BehaviorSubject<boolean>(false);
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    console.log('AuthService.constructor()')
+    if (this.getCurrentToken()) {
+      this.loggedIn.next(true);
+    }
+  }
 
   get isLoggedIn() {
     return this.loggedIn.asObservable();
@@ -35,18 +40,19 @@ export class AuthService {
     localStorage.setItem(this.userKey, JSON.stringify(user));
   }
 
-  public signUp(user) {
-    return this.http.post(this.getUrl("/users"), user);
+  public signUp(user: User) {
+    return this.http.post(this.getUrl("/users"), {
+      email: user.email,
+      password: user.password
+    });
   }
 
-  public signIn(userName: string, password: string): Observable<{ err: Error, user: Object }> {
-    console.log('userName: ' + userName);
-    console.log('password: ' + password);
-    console.log(this.getUrl('/sessions'))
+  public signIn(user: User): Observable<{ err: Error, user: Object }> {
+    console.log(this.getUrl('/tokens'))
     return new Observable(observer => {
-      const req = this.http.post(this.getUrl('/sessions'), {
-        userName: userName,
-        password: password
+      const req = this.http.post(this.getUrl('/tokens'), {
+        email: user.email,
+        password: user.password
       }).subscribe(res => {
         console.log('res:')
         console.log(res);
@@ -87,5 +93,22 @@ export class AuthService {
     if (!this.currentUser)
       this.currentUser = JSON.parse(localStorage.getItem(this.userKey));
     return this.currentUser;
+  }
+
+  public validateEmail(email: string) {
+    return new Observable(observer => {
+      this.http.get(this.getUrl(`/users/${email}`))
+        .subscribe(
+          res => {
+            observer.next(true);
+          },
+          err => {
+            observer.next(false);
+            observer.complete();
+          },
+          () => {
+            observer.complete();
+          })
+    });
   }
 }
