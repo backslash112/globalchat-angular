@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit {
       },
       err => {
         console.log('login faild!');
+        this.form.controls["password"].setErrors({ wrong: true });
       });
   }
 }
