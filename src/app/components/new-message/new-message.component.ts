@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Conversation } from '../../models/conversation.model';
+import { ConversationService } from '../../services/conversation.service';
 
 @Component({
   selector: 'app-new-message',
@@ -12,9 +14,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewMessageComponent implements OnInit {
 
-  constructor() { }
+  currentconversation: Conversation;
+  subscription: any;
+  message: String = "";
+  constructor(private conversationService: ConversationService) {
+    this.subscription = this.conversationService.conversationChanged$.subscribe(c => {
+      console.log('conversation changed at NewMessageComponent!');
+      this.currentconversation = c;
+    })
+   }
 
   ngOnInit() {
   }
 
+  onSend() {
+    console.log(this.message);
+    this.message = "";
+  }
 }

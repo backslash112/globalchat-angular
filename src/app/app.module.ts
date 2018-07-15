@@ -17,7 +17,7 @@ import {MatCardModule} from '@angular/material/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UniqueEmailDirective } from './directives/unique-email.directive';
 import { NewMessageComponent } from './components/new-message/new-message.component';
@@ -52,7 +52,8 @@ import {MatListModule} from '@angular/material/list';
     BrowserAnimationsModule,
     MatFormFieldModule,
     ReactiveFormsModule,  // for [formGroup]
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
     
   ],
   providers: [FormBuilder],
