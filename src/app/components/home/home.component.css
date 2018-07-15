@@ -1,7 +1,12 @@
-#container {
-  height: 100%;
+ #container {
+  /* 64px is the height of header */
+  height: calc(100% - 64px); 
   width: 100%;
   border-collapse: collapse;
-  position:relative;
+  position:relative; 
   background-color: teal
+}
+
+mat-grid-list {
+  height: 100%;
 }

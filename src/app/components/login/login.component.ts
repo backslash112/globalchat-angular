@@ -12,6 +12,7 @@ import { Router } from '../../../../node_modules/@angular/router';
 export class LoginComponent implements OnInit {
 
   form: FormGroup;
+  loggingIn: boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -27,19 +28,22 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(`email: ${this.form.controls["email"].value}`);
-    console.log(`password: ${this.form.controls["password"].value}`);
-    const email = this.form.controls["email"].value;
-    const password = this.form.controls["password"].value;
-    const user = new User(email, password);
-    this.authService.signIn(user).subscribe(
-      data => {
-        console.log('login success!');
-        this.router.navigate(["/"]);
-      },
-      err => {
-        console.log('login faild!');
-        this.form.controls["password"].setErrors({ wrong: true });
-      });
+    this.loggingIn = true;
+    setTimeout(() => {
+      console.log(`email: ${this.form.controls["email"].value}`);
+      console.log(`password: ${this.form.controls["password"].value}`);
+      const email = this.form.controls["email"].value;
+      const password = this.form.controls["password"].value;
+      const user = new User(email, password);
+      this.authService.signIn(user).subscribe(
+        data => {
+          console.log('login success!');
+          this.router.navigate(["/"]);
+        },
+        err => {
+          console.log('login faild!');
+          this.form.controls["password"].setErrors({ wrong: true });
+        });
+    }, 2000);
   }
 }

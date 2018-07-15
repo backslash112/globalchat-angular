@@ -1,14 +1,35 @@
+<div id="container">
+  <mat-grid-list cols="40" rowHeight="fit">
 
-<table id="container">
-  <tr >
-    <td valign="top" style="background-color: aqua">0</td>
-  </tr>
 
-  <tr>
-    <td style="background-color: palegoldenrod; padding: 0">2</td>
-  </tr>
+    <mat-grid-tile [colspan]="10" [rowspan]="30" [style.background]="'green'">
+      <app-conversation-list></app-conversation-list>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="30" [rowspan]="5" [style.background]="'green'">
+      <app-conversation-user></app-conversation-user>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="30" [rowspan]="20" [style.background]="'green'">
+      <app-messages></app-messages>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="30" [rowspan]="5" [style.background]="'green'">
+      <app-new-message></app-new-message>
+    </mat-grid-tile>
 
-  <tr >
-    <td valign="bottom" style="background-color: mediumaquamarine">4</td>
-  </tr>
-</table>
+
+  </mat-grid-list>
+</div>
+
+<!-- <div id="container">
+  <div id="conversations">
+      <app-conversation-list></app-conversation-list>
+  </div>
+  <div id="header">
+    <app-conversation-user></app-conversation-user>
+  </div>
+  <div id="content">
+    <app-messages></app-messages>
+  </div>
+  <div id="footer">
+    <app-new-message></app-new-message>
+  </div>
+</div> -->

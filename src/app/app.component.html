@@ -1,25 +1,2 @@
-<table id="container">
-  <tr>
-    <td valign="top" style="background-color: mediumaquamarine; height: 64px;">
-      <div id="main"  >
-        <app-header> </app-header>
-      </div>
-    </td>
-  </tr>
-
-  <tr>
-    <td style="background-color:lightsteelblue; position: relative;">
-      <router-outlet> </router-outlet>
-    </td>
-  </tr>
-
-  <tr>
-    <td valign="bottom" style="background-color: lime; height: 100px">
-      <div id="footer">
-        <app-footer></app-footer>
-      </div>
-    </td>
-  </tr>
-</table>
-
-<!-- position the footer at the bottom of its container: https://stackoverflow.com/a/9090522/2195426 -->
+<app-header></app-header>
+<router-outlet></router-outlet>

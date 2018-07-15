@@ -1,0 +1,10 @@
+<p>
+  conversation-list works!
+</p>
+<mat-list>
+  <mat-list-item *ngFor="let user of users">
+    <app-conversation-list-item [user]="user">
+
+    </app-conversation-list-item>
+  </mat-list-item>
+</mat-list>

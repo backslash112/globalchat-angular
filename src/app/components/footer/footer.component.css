@@ -1,0 +1,7 @@
+.container {
+  /* max-width: 300px; */
+  margin: 0 auto; /* locate to center */
+  text-align: center;
+  height: 100px;
+  background-color: blanchedalmond
+}

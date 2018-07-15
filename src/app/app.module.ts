@@ -20,6 +20,10 @@ import {MatInputModule} from '@angular/material/input';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UniqueEmailDirective } from './directives/unique-email.directive';
+import { NewMessageComponent } from './components/new-message/new-message.component';
+import { ConversationUserComponent } from './components/conversation-user/conversation-user.component';
+import { ConversationListItemComponent } from './components/conversation-list-item/conversation-list-item.component';
+import {MatListModule} from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -31,13 +35,17 @@ import { UniqueEmailDirective } from './directives/unique-email.directive';
     FooterComponent,
     MessagesComponent,
     ConversationListComponent,
-    UniqueEmailDirective
+    NewMessageComponent,
+    UniqueEmailDirective,
+    ConversationUserComponent,
+    ConversationListItemComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MatToolbarModule,
     MatGridListModule,
+    MatListModule,
     MatButtonModule,
     MatCardModule,
     MatInputModule,

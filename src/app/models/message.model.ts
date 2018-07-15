@@ -1,5 +1,5 @@
 import { User } from "./user.model";
-import { UserService } from "../services/user.service";
+import { AuthService } from "../services/auth.service";
 
 export class Message {
   text: string;
