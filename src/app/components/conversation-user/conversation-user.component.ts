@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Conversation } from '../../models/conversation.model';
+import { ConversationService } from '../../services/conversation.service';
 import { User } from '../../models/user.model';
 
 @Component({
@@ -6,12 +8,21 @@ import { User } from '../../models/user.model';
   templateUrl: './conversation-user.component.html',
   styleUrls: ['./conversation-user.component.css']
 })
-export class ConversationUserComponent implements OnInit {
-  user: User;
-  constructor() { }
+export class ConversationUserComponent implements OnInit, OnDestroy {
+  conversation: Conversation;
+  subscription: any;
+  constructor(private conversationService: ConversationService) {
+    
+    this.subscription = this.conversationService.conversationChanged$.subscribe(c => {
+      if (!c) return;
+      this.conversation = c;
+    })
+   }
   
   ngOnInit() {
-    this.user = new User("user8");
   }
 
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 }

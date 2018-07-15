@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { User } from '../../models/user.model';
+import { Conversation } from '../../models/conversation.model';
 
 @Component({
   selector: 'app-conversation-list-item',
@@ -10,7 +10,7 @@ export class ConversationListItemComponent implements OnInit {
 
   constructor() { }
 
-  @Input() user: User;
+  @Input() conversation: Conversation;
   ngOnInit() {
   }
 

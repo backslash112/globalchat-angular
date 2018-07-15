@@ -1,4 +1,3 @@
-<p>
-  conversation-user works!
-  {{ user.email }}
+<p *ngIf="conversation">
+  {{ conversation.user.email }}
 </p>

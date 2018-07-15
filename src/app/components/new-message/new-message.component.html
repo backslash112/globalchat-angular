@@ -1,2 +1,2 @@
-<textarea matInput placeholder="Type a message..." [(ngModel)]="message"></textarea>
-<button (click)="onSend()">Send</button>
+<textarea matInput placeholder="Type a message..." [(ngModel)]="message" (ngModelChange)="valueChanged()"></textarea>
+<button (click)="onSend()">Send</button>  
