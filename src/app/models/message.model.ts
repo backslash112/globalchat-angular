@@ -1,11 +1,13 @@
 import { User } from "./user.model";
-import { AuthService } from "../services/auth.service";
 
 export class Message {
   text: string;
   from: User;
+  to: User;
 
-  constructor(text: string) {
+  constructor(text: string, from: User, to: User) {
     this.text = text;
+    this.from = from;
+    this.to = to;
   }
 }
