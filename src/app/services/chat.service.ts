@@ -42,11 +42,12 @@ export class ChatService {
 
   public onNewUserLoggedIn(): Observable<User> {
     return new Observable<User>(observer => {
-      this.socket.on('joined', data => {
-        console.log(`${data.user.email} joined`)
-        console.dir(data.user);
-        if (data.room != this.authService.getCurrentUser().email) {
-          observer.next(data.user);
+      this.socket.on('joined', user => {
+        console.dir(user);
+        console.log(`${user.email} joined`)
+        // console.dir(data.user);
+        if (user.email != this.authService.getCurrentUser().email) {
+          observer.next(user);
         }
       });
     });
