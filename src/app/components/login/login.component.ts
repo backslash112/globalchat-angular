@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user.model';
 import { Router } from '../../../../node_modules/@angular/router';
+import { ChatService } from '../../services/chat.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router) { }
+    private router: Router,
+    private chatService: ChatService) { }
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -39,6 +41,7 @@ export class LoginComponent implements OnInit {
         data => {
           console.log('login success!');
           this.router.navigate(["/"]);
+          this.chatService.join();
         },
         err => {
           console.log('login faild!');

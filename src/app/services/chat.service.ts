@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import * as io from 'socket.io-client';
 import { Observable } from 'rxjs';
 import { Message } from '../models/message.model';
+import { User } from '../models/user.model';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,13 +11,19 @@ import { Message } from '../models/message.model';
 export class ChatService {
   private url = 'http://0.0.0.0:8080/chat';
   private socket;
-  constructor() {
+  constructor(private authService: AuthService) {
     this.socket = io.connect(this.url);
     this.socket.on('connect', () => {
       console.log(this.socket);
     });
   }
 
+  public join() {
+    const user = this.authService.getCurrentUser();
+    if (user) {
+      this.socket.emit('join', { user: user });
+    }
+  }
   public send(message: Message) {
     this.socket.emit('send_message', {
       from: message.from.email,
@@ -27,6 +35,26 @@ export class ChatService {
   public onMessage(): Observable<Message> {
     return new Observable<Message>(observer => {
       this.socket.on('new_message', data => {
+        observer.next(data);
+      });
+    });
+  }
+
+  public onNewUserLoggedIn(): Observable<User> {
+    return new Observable<User>(observer => {
+      this.socket.on('joined', data => {
+        console.log(`${data.user.email} joined`)
+        console.dir(data.user);
+        if (data.room != this.authService.getCurrentUser().email) {
+          observer.next(data.user);
+        }
+      });
+    });
+  }
+
+  public onUserLoggedOut(): Observable<User> {
+    return new Observable<User>(observer => {
+      this.socket.on('leaved', data => {
         observer.next(data);
       });
     });
