@@ -17,9 +17,10 @@ describe('ChatService', () => {
   }));
 
   it('should can send message to server', inject([ChatService, AuthService], (service: ChatService, authService: AuthService) => {
-    const user = new User("user2@gmail.com");
-    const message = new Message("hi, there");
+    const user1 = new User("user1@gmail.com");
+    const user2 = new User("user2@gmail.com");
+    const message = new Message("hi, there", user1, user2);
     message.from = authService.getCurrentUser();
-    service.send(message, user);
+    service.send(message);
   }));
 });
