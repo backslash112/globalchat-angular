@@ -28,6 +28,7 @@ export class AuthService {
     return this.loggedIn.asObservable();
   }
 
+
   private getUrl(router: string): string {
     return server.host + ":" + server.port + router;
   }

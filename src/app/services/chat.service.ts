@@ -14,16 +14,31 @@ export class ChatService {
   constructor(private authService: AuthService) {
     this.socket = io.connect(this.url);
     this.socket.on('connect', () => {
-      console.log(this.socket);
+      // console.log(this.socket);
+      this.join();
     });
+    this.socket.on('disconnect', () => {
+      console.log('disconnect from server!');
+    })
+
   }
 
   public join() {
     const user = this.authService.getCurrentUser();
     if (user) {
-      this.socket.emit('join', { user: user });
+      this.socket.emit('join', user);
     }
   }
+
+  public leave() {
+    console.log('leave()')
+    const user = this.authService.getCurrentUser();
+    if (user) {
+      console.log('emit leave')
+      this.socket.emit('leave', user);
+    }
+  }
+
   public send(message: Message) {
     this.socket.emit('send_message', {
       from: message.from.email,
@@ -43,6 +58,10 @@ export class ChatService {
   public onNewUserLoggedIn(): Observable<User> {
     return new Observable<User>(observer => {
       this.socket.on('joined', user => {
+        let currentUser = this.authService.getCurrentUser();
+        if (!currentUser) {
+          return;
+        }
         console.dir(user);
         console.log(`${user.email} joined`)
         // console.dir(data.user);
@@ -56,6 +75,9 @@ export class ChatService {
   public onUserLoggedOut(): Observable<User> {
     return new Observable<User>(observer => {
       this.socket.on('leaved', data => {
+        if (!this.authService.getCurrentUser()) {
+          return;
+        }
         observer.next(data);
       });
     });
