@@ -19,12 +19,6 @@ export class ConversationService {
   public conversationListChanged$ = this._conversationListChanged.asObservable();
 
   constructor(private chatService: ChatService) {
-    // this._conversationList.push(new Conversation(new User("Lucy")));
-    // this._conversationList.push(new Conversation(new User("Hannah")));
-    // this._conversationList.push(new Conversation(new User("User1")));
-    // this._conversationList.push(new Conversation(new User("Meng")));
-    this._conversationListChanged.next(this._conversationList);
-
     this._currentConversation = this._conversationList[0];
     this._conversationChanged.next(this._currentConversation);
 
