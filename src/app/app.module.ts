@@ -24,6 +24,7 @@ import { NewMessageComponent } from './components/new-message/new-message.compon
 import { ConversationUserComponent } from './components/conversation-user/conversation-user.component';
 import { ConversationListItemComponent } from './components/conversation-list-item/conversation-list-item.component';
 import {MatListModule} from '@angular/material/list';
+import {MatBadgeModule} from '@angular/material/badge';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import {MatListModule} from '@angular/material/list';
     MatFormFieldModule,
     ReactiveFormsModule,  // for [formGroup]
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatBadgeModule
     
   ],
   providers: [FormBuilder],

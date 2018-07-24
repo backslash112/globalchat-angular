@@ -10,3 +10,7 @@
 mat-grid-list {
   height: 100%;
 }
+
+app-conversation-list {
+  width: 100%;
+}

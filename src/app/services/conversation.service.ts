@@ -23,7 +23,14 @@ export class ConversationService {
     this._conversationChanged.next(this._currentConversation);
 
     this.chatService.onMessage().subscribe(message => {
-      this._currentConversation.pushHistory(message);
+      // this._currentConversation.pushHistory(message);
+      for (let c of this._conversationList) {
+        if (c.user.email === message.from.email) {
+          c.pushHistory(message);
+          break;
+        }
+      }
+      this._conversationListChanged.next(this._conversationList);
     });
 
     this.chatService.onNewUserLoggedIn().subscribe(user => {

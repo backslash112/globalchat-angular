@@ -11,7 +11,7 @@ import { server } from '../../config';
   providedIn: 'root'
 })
 export class ChatService {
-  private url = 'http://192.168.1.17:8080/chat';
+  private url = 'http://0.0.0.0:8080/chat';
   private socket;
   constructor(
     private authService: AuthService,

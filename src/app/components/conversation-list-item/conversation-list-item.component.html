@@ -1,3 +1,5 @@
 <p>
-  {{ conversation?.user?.email }}
+  <span matBadge="{{unreadMessageCount}}" matBadgeSize="medium" matBadgeOverlap="false">
+    {{ conversation?.user?.email }}
+  </span>
 </p>
