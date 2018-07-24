@@ -18,7 +18,7 @@ export class ConversationService {
   public conversationChanged$ = this._conversationChanged.asObservable();
   public conversationListChanged$ = this._conversationListChanged.asObservable();
 
-  constructor(private chatService: ChatService) { 
+  constructor(private chatService: ChatService) {
     // this._conversationList.push(new Conversation(new User("Lucy")));
     // this._conversationList.push(new Conversation(new User("Hannah")));
     // this._conversationList.push(new Conversation(new User("User1")));
@@ -31,16 +31,19 @@ export class ConversationService {
     this.chatService.onMessage().subscribe(message => {
       this._currentConversation.pushHistory(message);
     });
-    
+
     this.chatService.onNewUserLoggedIn().subscribe(user => {
+      let found = this._conversationList.some(c => {
+        return c.user.email == user.email;
+      })
+      if (found) return;
       let conversation = new Conversation(user);
       console.log(`then create a new conversation: ${conversation}`);
       this._conversationList.push(conversation);
     });
 
-    console.log('getOnlineUsers() called!')
-    this.chatService.getOnlineUsers().subscribe(res => {
-      for (let user of res["data"]) {
+    this.chatService.getOnlineUsers().subscribe(users => {
+      for (let user of users) {
         this._conversationList.push(new Conversation(user));
       }
     });
@@ -50,7 +53,7 @@ export class ConversationService {
     this._currentConversation = c;
     this._conversationChanged.next(c);
   }
-  
+
   public get conversationList(): Array<Conversation> {
     return this._conversationList;
   }
@@ -76,7 +79,7 @@ export class ConversationService {
     return this._currentConversation.history;
   }
 
-  public saveConversationDraft(draft: string){
+  public saveConversationDraft(draft: string) {
     this._currentConversation.draft = draft;
   }
 

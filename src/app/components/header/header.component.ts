@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '../../../../node_modules/@angular/router';
 import { ChatService } from '../../services/chat.service';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-header',
@@ -12,6 +13,7 @@ import { ChatService } from '../../services/chat.service';
 export class HeaderComponent implements OnInit {
 
   isLoggedIn$: Observable<boolean>;
+  user: User;
   constructor(
     private authService: AuthService,
     private chatService: ChatService,
@@ -19,6 +21,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.isLoggedIn$ = this.authService.isLoggedIn;
+    this.user = this.authService.getCurrentUser();
   }
 
   onLogout() {

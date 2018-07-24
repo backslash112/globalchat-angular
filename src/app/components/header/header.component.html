@@ -1,10 +1,11 @@
 <mat-toolbar color="primary" *ngIf="isLoggedIn$ | async">
-    <span>
-      <img src="assets/images/globalchat.ico" class="angular-logo">
-      GlobalChat
-    </span>
-    <span class="fill-remaining-space"></span>
-    <button mat-button routerLink="">Home</button>
-    <!-- <button mat-button routerLink="login">Login</button> -->
-    <button mat-button (click)="onLogout()" *ngIf="isLoggedIn$ | async">Logout</button>
-  </mat-toolbar>
+  <span>
+    <img src="assets/images/globalchat.ico" class="angular-logo"> GlobalChat
+  </span>
+  <span class="fill-remaining-space"></span>
+  <button mat-button>{{ user?.email }}</button>
+
+  <button mat-button routerLink="">Home</button>
+  <!-- <button mat-button routerLink="login">Login</button> -->
+  <button mat-button (click)="onLogout()" *ngIf="isLoggedIn$ | async">Logout</button>
+</mat-toolbar>

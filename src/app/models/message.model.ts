@@ -5,7 +5,7 @@ export class Message {
   from: User;
   to: User;
 
-  constructor(text: string, from: User, to: User) {
+  constructor(text: string, from: User, to: User = null) {
     this.text = text;
     this.from = from;
     this.to = to;

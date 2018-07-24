@@ -11,7 +11,7 @@ import { server } from '../../config';
   providedIn: 'root'
 })
 export class ChatService {
-  private url = 'http://0.0.0.0:8080/chat';
+  private url = 'http://192.168.1.17:8080/chat';
   private socket;
   constructor(
     private authService: AuthService,
@@ -44,17 +44,15 @@ export class ChatService {
   }
 
   public send(message: Message) {
-    this.socket.emit('send_message', {
-      from: message.from.email,
-      to: message.to.email,
-      message: message.text
-    })
+    this.socket.emit('send_message', message)
   }
 
   public onMessage(): Observable<Message> {
     return new Observable<Message>(observer => {
-      this.socket.on('new_message', data => {
-        observer.next(data);
+      this.socket.on('new_message', message => {
+        console.log(`new_message: ${message.from.email}: '${message.text}'`)
+        console.dir()
+        observer.next(message);
       });
     });
   }
@@ -91,7 +89,13 @@ export class ChatService {
     return server.host + ":" + server.port + router;
   }
 
-  public getOnlineUsers() {
-    return this.http.get(this.getUrl("/chats/online-users"));
+  public getOnlineUsers(): Observable<Array<User>> {
+    return new Observable(observer => {
+      this.http.get(this.getUrl("/chats/online-users"))
+        .subscribe(
+          res => {
+            observer.next(res["data"]);
+          })
+    });
   }
 }
