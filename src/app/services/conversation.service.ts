@@ -31,10 +31,18 @@ export class ConversationService {
     this.chatService.onMessage().subscribe(message => {
       this._currentConversation.pushHistory(message);
     });
+    
     this.chatService.onNewUserLoggedIn().subscribe(user => {
       let conversation = new Conversation(user);
       console.log(`then create a new conversation: ${conversation}`);
       this._conversationList.push(conversation);
+    });
+
+    console.log('getOnlineUsers() called!')
+    this.chatService.getOnlineUsers().subscribe(res => {
+      for (let user of res["data"]) {
+        this._conversationList.push(new Conversation(user));
+      }
     });
   }
 

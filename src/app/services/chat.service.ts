@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { Message } from '../models/message.model';
 import { User } from '../models/user.model';
 import { AuthService } from './auth.service';
+import { HttpClient } from '@angular/common/http';
+import { server } from '../../config';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,9 @@ import { AuthService } from './auth.service';
 export class ChatService {
   private url = 'http://0.0.0.0:8080/chat';
   private socket;
-  constructor(private authService: AuthService) {
+  constructor(
+    private authService: AuthService,
+    private http: HttpClient) {
     this.socket = io.connect(this.url);
     this.socket.on('connect', () => {
       // console.log(this.socket);
@@ -81,5 +85,13 @@ export class ChatService {
         observer.next(data);
       });
     });
+  }
+
+  private getUrl(router: string): string {
+    return server.host + ":" + server.port + router;
+  }
+
+  public getOnlineUsers() {
+    return this.http.get(this.getUrl("/chats/online-users"));
   }
 }
