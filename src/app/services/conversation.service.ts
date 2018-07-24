@@ -36,6 +36,8 @@ export class ConversationService {
       let found = this._conversationList.some(c => {
         return c.user.email == user.email;
       })
+      // or
+      // let found = this._conversationList.map(c => c.user.email).indexOf(user.email) >= 0;
       if (found) return;
       let conversation = new Conversation(user);
       console.log(`then create a new conversation: ${conversation}`);
