@@ -1,4 +1,4 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
+<form *ngIf="conversation" [formGroup]="form" (ngSubmit)="onSubmit()">
   <!-- <mat-form-field class="input-full-width" [hideRequiredMarker]="true"> -->
     <textarea class="input" matInput placeholder="Type a message..." formControlName="message" (ngModelChange)="valueChanged()" [readonly]="!enableInput"></textarea>
   <!-- </mat-form-field> -->
