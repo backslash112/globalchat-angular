@@ -22,7 +22,6 @@ export class NewMessageComponent implements OnInit {
   subscription: any;
   // message: string = "";
   form: FormGroup;
-  enableInput: boolean = false;
   constructor(
     private conversationService: ConversationService,
     private authService: AuthService,
@@ -33,7 +32,6 @@ export class NewMessageComponent implements OnInit {
       if (c.draft) {
         this.form.setValue({ message: c.draft });
       }
-      this.enableInput = true;
     })
   }
 

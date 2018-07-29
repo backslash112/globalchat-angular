@@ -1,6 +1,6 @@
 <form *ngIf="conversation" [formGroup]="form" (ngSubmit)="onSubmit()">
   <!-- <mat-form-field class="input-full-width" [hideRequiredMarker]="true"> -->
-    <textarea class="input" matInput placeholder="Type a message..." formControlName="message" (ngModelChange)="valueChanged()" [readonly]="!enableInput"></textarea>
+    <textarea class="input" matInput placeholder="Type a message..." formControlName="message" (ngModelChange)="valueChanged()"></textarea>
   <!-- </mat-form-field> -->
   <button mat-raised-button color="primary" [disabled]="!form.valid">Send</button>
 </form>
