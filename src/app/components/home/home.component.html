@@ -1,35 +1,14 @@
-<div id="container">
-  <mat-grid-list cols="40" rowHeight="fit">
-
-
-    <mat-grid-tile [colspan]="10" [rowspan]="30" [style.background]="'white'">
-      <app-conversation-list></app-conversation-list>
-    </mat-grid-tile>
-    <mat-grid-tile [colspan]="30" [rowspan]="5" [style.background]="'white'">
-      <app-conversation-user></app-conversation-user>
-    </mat-grid-tile>
-    <mat-grid-tile [colspan]="30" [rowspan]="20" [style.background]="'white'">
-      <app-messages></app-messages>
-    </mat-grid-tile>
-    <mat-grid-tile [colspan]="30" [rowspan]="5" [style.background]="'white'">
-      <app-new-message></app-new-message>
-    </mat-grid-tile>
-
-
-  </mat-grid-list>
-</div>
-
-<!-- <div id="container">
-  <div id="conversations">
-      <app-conversation-list></app-conversation-list>
+<div id="container" style="position: relative;">
+  <div id="conversation-list-container">
+    <app-conversation-list></app-conversation-list>
   </div>
-  <div id="header">
+  <div id="conversation-user-container">
     <app-conversation-user></app-conversation-user>
   </div>
-  <div id="content">
+  <div id="messages-container">
     <app-messages></app-messages>
   </div>
-  <div id="footer">
+  <div id="new-message-container">
     <app-new-message></app-new-message>
   </div>
-</div> -->
+</div>

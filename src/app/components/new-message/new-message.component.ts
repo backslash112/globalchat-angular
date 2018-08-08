@@ -8,11 +8,11 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-new-message',
-  host: {
-    "[style.display]": "'inline-block'",
-    "[style.width.%]": "100",
-    "[style.height.%]": "100",
-  },
+  // host: {
+  //   "[style.display]": "'inline-block'",
+  //   "[style.width.%]": "100",
+  //   "[style.height.%]": "100",
+  // },
   templateUrl: './new-message.component.html',
   styleUrls: ['./new-message.component.css']
 })

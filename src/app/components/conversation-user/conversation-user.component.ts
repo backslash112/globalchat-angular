@@ -5,6 +5,11 @@ import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-conversation-user',
+    host: {
+    "[style.display]": "'inline-block'",
+    "[style.width.%]": "100",
+    "[style.height.%]": "100",
+  },
   templateUrl: './conversation-user.component.html',
   styleUrls: ['./conversation-user.component.css']
 })

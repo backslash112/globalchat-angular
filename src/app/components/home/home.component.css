@@ -4,13 +4,33 @@
   width: 100%;
   border-collapse: collapse;
   position:relative; 
-  background-color: teal
+  /* background-color: teal */
 }
 
-mat-grid-list {
-  height: 100%;
+#conversation-list-container {
+  width: 200px; 
+  height: 100%; 
+  position: absolute; 
+  left: 0px; 
+  border-right: 1px solid lightgray; 
 }
 
-app-conversation-list {
-  width: 100%;
+#messages-container {
+  margin-left: 200px; 
+  width: calc(100% - 200px); 
+  height: calc(100% - 200px); 
+  border-top: 1px solid lightgray; 
+  border-bottom: 1px solid lightgray;
+}
+
+#new-message-container {
+  width: calc(100% - 200px); 
+  height: 100px; 
+  margin-left: 200px;
+}
+
+#conversation-user-container {
+  width: calc(100% - 200px); 
+  margin-left: 200px; 
+  height: 100px;
 }
